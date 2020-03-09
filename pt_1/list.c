@@ -34,8 +34,6 @@ void free_list(Node* head)
     for(; head; head = next)
     {
         next = head->next;
-        if (head->string)
-            free(head->string);
         free(head);
     }
 }

@@ -1,6 +1,5 @@
 kolganov
 mama
 apa
-end
-^X
+end^X
 

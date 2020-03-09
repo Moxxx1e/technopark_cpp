@@ -5,7 +5,7 @@
 
 void output_hello_message()
 {
-    fprintf(TMP_OUT_FILE, "Input text: \n");
+    fprintf(TMP_OUT_FILE, "Input text (type ^X to finish typing): \n");
 }
 
 void output_result_message()
@@ -27,7 +27,7 @@ int main(void)
 
     Node* result = NULL;
     output_result_message();
-    int res = filter(vector, size, result);
+    int res = filter(vector, size, &result);
     if (res == 0)
         fprintf(TMP_OUT_FILE, "Filter is empty!");
     else

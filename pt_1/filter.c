@@ -20,6 +20,7 @@ int isStringGood(const char* const string)
     int i = 0;
     int bufer_elements_counter = 0;
 
+    // TODO: fix memory leak in some cases like only ^X string
     while (string[i] != '\n')
     {
         if (symbolInBufer(string[i], symbols_bufer, DIFF_SYMBOLS_NUM))
@@ -37,17 +38,16 @@ int isStringGood(const char* const string)
     return 0;
 }
 
-int filter(const char** const source, int number_of_strings, Node* head_result)
+int filter(const char** const source, int number_of_strings, Node** head_result)
 {
     for (int i = 0; i < number_of_strings; ++i)
     {
         if (isStringGood(source[i]))
         {
             Node* new_element = create_node(source[i]);
-            head_result = append_to_list(head_result, new_element);
+            *head_result = append_to_list(*head_result, new_element);
         }
     }
 
-    print_list(head_result);
-    return list_size(head_result);
+    return list_size(*head_result);
 }
