@@ -28,18 +28,6 @@ Node* append_to_list(Node* head, Node* new_element)
     return head;
 }
 
-Node* append_string_to_list(Node* head, const char* string)
-{
-    if (!head)
-    {
-        return create_node(string);
-    }
-
-    head = append_to_list(head, create_node(string));
-
-    return head;
-}
-
 void free_list(Node* head)
 {
     Node* next;
