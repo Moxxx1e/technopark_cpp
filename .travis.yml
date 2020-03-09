@@ -27,7 +27,7 @@ before_script:
     - make
 
 script:
-    - valgrind --track-origins=yes --leak-check=full -s ./pt_1 < in1.txt
+    - valgrind --track-origins=yes --leak-check=full ./pt_1 < in1.txt
     - cppcheck -icmake-build-debug/ --inconclusive --enable=all --language=c++ .
     #- ./test
     #- gcovr -r
