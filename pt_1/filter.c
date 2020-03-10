@@ -19,10 +19,14 @@ int isStringGood(const char* const string)
     char symbols_bufer[DIFF_SYMBOLS_NUM] = {0};
     int i = 0;
     int bufer_elements_counter = 0;
-
-    // TODO: fix memory leak in some cases like only ^X string
-    while (string[i] != '\n')
+    
+    while (string[i] != '\0')
     {
+        if (string[i] == '\n')
+        {
+            break;
+        }
+
         if (symbolInBufer(string[i], symbols_bufer, DIFF_SYMBOLS_NUM))
         {
             i++;
