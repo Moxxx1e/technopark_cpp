@@ -26,8 +26,9 @@ int main(void)
     }
 
     Node* result = NULL;
-    output_result_message();
     int res = filter(vector, number_of_elements, &result);
+
+    output_result_message();
     if (res == 0)
         fprintf(TMP_OUT_FILE, "Filter is empty!");
     else
