@@ -9,7 +9,7 @@ typedef struct Node
     struct Node* next;
 } Node;
 
-Node* create_node(const char* string);
+Node* create_node(char* string);
 
 Node* append_to_list(Node* head, Node* new_element);
 

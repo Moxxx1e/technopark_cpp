@@ -3,7 +3,7 @@
 
 #include "header.h"
 
-char** read_text(size_t *size);
+char** read_text(unsigned int *number_of_elements);
 
 char* read_string();
 

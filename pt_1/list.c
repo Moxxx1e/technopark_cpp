@@ -1,6 +1,6 @@
 #include "list.h"
 
-Node* create_node(const char* string)
+Node* create_node(char* string)
 {
     Node* element = (Node*) malloc(sizeof(Node));
 

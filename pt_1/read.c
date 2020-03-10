@@ -73,7 +73,7 @@ char* read_string()
     return string;
 }
 
-char** read_text(size_t *size)
+char** read_text(unsigned int *number_of_elements)
 {
     char** result = (char**)malloc(sizeof(char*)*RESULT_SIZE);
     if (!result)
@@ -82,7 +82,7 @@ char** read_text(size_t *size)
         return NULL;
     }
 
-    size_t i = 0;
+    unsigned int i = 0;
     size_t tmp_size = RESULT_SIZE;
     int end_line_flag = 0;
 
@@ -97,7 +97,7 @@ char** read_text(size_t *size)
 
         if (isEndLine(string))
         {
-            int string_length = strlen(string);
+            unsigned long string_length = strlen(string);
             string[string_length - 3] = '\0';
             string_length -= 2;
 
@@ -145,6 +145,6 @@ char** read_text(size_t *size)
     }
     result = test_realloc;
 
-    *size = i;
+    *number_of_elements = i;
     return result;
 }

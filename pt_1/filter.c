@@ -19,7 +19,7 @@ int isStringGood(const char* const string)
     char symbols_bufer[DIFF_SYMBOLS_NUM] = {0};
     int i = 0;
     int bufer_elements_counter = 0;
-    
+
     while (string[i] != '\0')
     {
         if (string[i] == '\n')
@@ -42,7 +42,7 @@ int isStringGood(const char* const string)
     return 0;
 }
 
-int filter(const char** const source, int number_of_strings, Node** head_result)
+int filter(char** source, int number_of_strings, Node** head_result)
 {
     for (int i = 0; i < number_of_strings; ++i)
     {

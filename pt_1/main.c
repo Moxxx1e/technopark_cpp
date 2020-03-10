@@ -18,8 +18,8 @@ void output_result_message()
 int main(void)
 {
     output_hello_message();
-    int size = 0;
-    const char** vector = read_text(&size);
+    unsigned int number_of_elements = 0;
+    char** vector = read_text(&number_of_elements);
     if (!vector)
     {
         return -1;
@@ -27,14 +27,14 @@ int main(void)
 
     Node* result = NULL;
     output_result_message();
-    int res = filter(vector, size, &result);
+    int res = filter(vector, number_of_elements, &result);
     if (res == 0)
         fprintf(TMP_OUT_FILE, "Filter is empty!");
     else
         print_list(result);
 
     free_list(result);
-    for (int i = 0; i < size; ++i)
+    for (int i = 0; i < number_of_elements; ++i)
     {
         free(vector[i]);
     }
