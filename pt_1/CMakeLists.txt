@@ -16,10 +16,13 @@ add_executable(pt_1 filter.c
         read.c
         read.h)
 
-#find_package(GTest REQUIRED)
-#include_directories(${GTEST_INCLUDE_DIRS})
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIRS})
 
-#add_executable(test
- #       filter.h
-  #      test.cpp)
-#target_link_libraries(test ${GTEST_LIBRARIES} pthread)
+add_executable(test
+        test.c
+        filter.c
+        list.c
+        read.c
+        )
+target_link_libraries(test ${GTEST_LIBRARIES} pthread)
