@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.12)
 project(pt_1)
 
 set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_COMPILER g++)
+set(CMAKE_C_FLAGS "-fprofile-arcs -ftest-coverage -fPIC -O0")
 
 include_directories(.)
 
@@ -14,8 +16,8 @@ add_executable(pt_1 filter.c
         read.c
         read.h)
 
-find_package(GTest REQUIRED)
-include_directories(${GTEST_INCLUDE_DIRS})
+#find_package(GTest REQUIRED)
+#include_directories(${GTEST_INCLUDE_DIRS})
 
 #add_executable(test
  #       filter.h
