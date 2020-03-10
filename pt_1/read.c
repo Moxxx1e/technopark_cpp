@@ -75,8 +75,8 @@ char* read_string()
 
 char** read_text(unsigned int *number_of_elements)
 {
-    char** result = (char**)malloc(sizeof(char*) * RESULT_SIZE);
-    if (!result)
+    char** vector_of_strings = (char**)malloc(sizeof(char*) * RESULT_SIZE);
+    if (!vector_of_strings)
     {
         fprintf(TMP_OUT_FILE, MALLOC_ERR_MSG);
         return NULL;
@@ -91,7 +91,7 @@ char** read_text(unsigned int *number_of_elements)
         char* string = read_string();
         if (!string)
         {
-            free(result);
+            free(vector_of_strings);
             return NULL;
         }
 
@@ -106,7 +106,7 @@ char** read_text(unsigned int *number_of_elements)
             {
                 fprintf(TMP_OUT_FILE, REALLOC_ERR_MSG);
                 free(string);
-                free(result);
+                free(vector_of_strings);
                 return NULL;
             }
 
@@ -114,20 +114,20 @@ char** read_text(unsigned int *number_of_elements)
             end_line_flag = 1;
         }
 
-        result[i] = string;
+        vector_of_strings[i] = string;
         i++;
 
         if(i == tmp_size)
         {
-            char** test_realloc = (char**)realloc(result, sizeof(char*) * tmp_size * EXPANSION_KOEF);
+            char** test_realloc = (char**)realloc(vector_of_strings, sizeof(char*) * tmp_size * EXPANSION_KOEF);
             if (!test_realloc)
             {
-                free(result);
+                free(vector_of_strings);
                 fprintf(TMP_OUT_FILE, REALLOC_ERR_MSG);
                 return NULL;
             }
             tmp_size *= EXPANSION_KOEF;
-            result = test_realloc;
+            vector_of_strings = test_realloc;
         }
 
         if (end_line_flag)
@@ -136,15 +136,15 @@ char** read_text(unsigned int *number_of_elements)
         }
     }
 
-    char** test_realloc = (char**)realloc(result, sizeof(char*) * i);
+    char** test_realloc = (char**)realloc(vector_of_strings, sizeof(char*) * i);
     if (!test_realloc)
     {
-        free(result);
+        free(vector_of_strings);
         fprintf(TMP_OUT_FILE, REALLOC_ERR_MSG);
         return NULL;
     }
-    result = test_realloc;
+    vector_of_strings = test_realloc;
 
     *number_of_elements = i;
-    return result;
+    return vector_of_strings;
 }

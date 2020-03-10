@@ -19,14 +19,14 @@ int main(void)
 {
     output_hello_message();
     unsigned int number_of_elements = 0;
-    char** vector = read_text(&number_of_elements);
-    if (!vector)
+    char** vector_of_strings = read_text(&number_of_elements);
+    if (!vector_of_strings)
     {
         return -1;
     }
 
     Node* result = NULL;
-    int res = filter(vector, number_of_elements, &result);
+    int res = filter(vector_of_strings, number_of_elements, &result);
 
     output_result_message();
     if (res == 0)
@@ -37,8 +37,8 @@ int main(void)
     free_list(result);
     for (int i = 0; i < number_of_elements; ++i)
     {
-        free(vector[i]);
+        free(vector_of_strings[i]);
     }
-    free(vector);
+    free(vector_of_strings);
     return 0;
 }
