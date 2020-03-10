@@ -1,13 +1,13 @@
 #include "gtest/gtest.h"
 #include "filter.h"
 
-TEST(filter, empty_string)
+TEST(isStringGood, empty_string)
 {
     const char* const string = "";
     ASSERT_EQ(isStringGood(string), 0);
 }
 
-TEST(filter, carriage_return_symbol)
+TEST(isStringGood, carriage_return_symbol)
 {
     ASSERT_EQ(isStringGood("\n"), 0);
 }
