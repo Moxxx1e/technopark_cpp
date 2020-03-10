@@ -2,7 +2,7 @@
 
 Node* create_node(char* string)
 {
-    Node* element = (Node*) malloc(sizeof(Node));
+    Node* element = (Node*)malloc(sizeof(Node));
 
     if (element)
     {

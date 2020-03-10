@@ -4,7 +4,7 @@
 #include "header.h"
 #include "list.h"
 
-int filter(char** source, int number_of_strings, Node** head_result);
+int filter(char** source, unsigned int number_of_strings, Node** head_result);
 
 int symbolInBufer(char symbol, const char* const bufer, size_t bufer_size);
 

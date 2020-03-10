@@ -42,7 +42,7 @@ int isStringGood(const char* const string)
     return 0;
 }
 
-int filter(char** source, int number_of_strings, Node** head_result)
+int filter(char** source, unsigned int number_of_strings, Node** head_result)
 {
     for (int i = 0; i < number_of_strings; ++i)
     {

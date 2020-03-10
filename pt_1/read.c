@@ -28,10 +28,10 @@ int isEndLine(char* string)
 
 char* read_string()
 {
-    char* string = (char*)malloc(sizeof (char) * STRING_SIZE);
+    char* string = (char*)malloc(sizeof(char) * STRING_SIZE);
     if (!string)
     {
-        printf(MALLOC_ERR_MSG);
+        fprintf(TMP_OUT_FILE, MALLOC_ERR_MSG);
         return NULL;
     }
 
@@ -43,10 +43,10 @@ char* read_string()
     {
         if (tmp_number_of_elements + strlen(chunk) > tmp_size)
         {
-            char* test_realloc = (char*)realloc(string, sizeof(char)*tmp_size*EXPANSION_KOEF);
+            char* test_realloc = (char*)realloc(string, sizeof(char) * tmp_size * EXPANSION_KOEF);
             if (!test_realloc)
             {
-                printf(REALLOC_ERR_MSG);
+                fprintf(TMP_OUT_FILE, REALLOC_ERR_MSG);
                 free(test_realloc);
                 free(string);
                 return NULL;
@@ -63,7 +63,7 @@ char* read_string()
     char* test_realloc = (char*)realloc(string, strlen(string) + BYTE_FOR_NUL);
     if (!test_realloc)
     {
-        printf(REALLOC_ERR_MSG);
+        fprintf(TMP_OUT_FILE, REALLOC_ERR_MSG);
         free(string);
         return NULL;
     }
@@ -75,10 +75,10 @@ char* read_string()
 
 char** read_text(unsigned int *number_of_elements)
 {
-    char** result = (char**)malloc(sizeof(char*)*RESULT_SIZE);
+    char** result = (char**)malloc(sizeof(char*) * RESULT_SIZE);
     if (!result)
     {
-        printf(MALLOC_ERR_MSG);
+        fprintf(TMP_OUT_FILE, MALLOC_ERR_MSG);
         return NULL;
     }
 
@@ -101,10 +101,10 @@ char** read_text(unsigned int *number_of_elements)
             string[string_length - 3] = '\0';
             string_length -= 2;
 
-            char *test_realloc = (char *) realloc(string, string_length + BYTE_FOR_NUL);
+            char *test_realloc = (char *)realloc(string, sizeof(char) * (string_length + BYTE_FOR_NUL));
             if (!test_realloc)
             {
-                printf(REALLOC_ERR_MSG);
+                fprintf(TMP_OUT_FILE, REALLOC_ERR_MSG);
                 free(string);
                 free(result);
                 return NULL;
@@ -119,11 +119,11 @@ char** read_text(unsigned int *number_of_elements)
 
         if(i == tmp_size)
         {
-            char** test_realloc = (char**)realloc(result, sizeof(char*)*tmp_size*EXPANSION_KOEF);
+            char** test_realloc = (char**)realloc(result, sizeof(char*) * tmp_size * EXPANSION_KOEF);
             if (!test_realloc)
             {
                 free(result);
-                printf(REALLOC_ERR_MSG);
+                fprintf(TMP_OUT_FILE, REALLOC_ERR_MSG);
                 return NULL;
             }
             tmp_size *= EXPANSION_KOEF;
@@ -136,11 +136,11 @@ char** read_text(unsigned int *number_of_elements)
         }
     }
 
-    char** test_realloc = (char**)realloc(result, sizeof(char*)*i);
+    char** test_realloc = (char**)realloc(result, sizeof(char*) * i);
     if (!test_realloc)
     {
         free(result);
-        printf(REALLOC_ERR_MSG);
+        fprintf(TMP_OUT_FILE, REALLOC_ERR_MSG);
         return NULL;
     }
     result = test_realloc;
