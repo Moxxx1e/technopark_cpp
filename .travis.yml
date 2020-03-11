@@ -1,0 +1,37 @@
+language: cpp
+os: linux
+compiler: gcc
+
+addons:
+    apt:
+        packages:
+            - cmake
+            - valgrind
+            - libgtest-dev
+            - gcovr
+
+env:
+    - DIR=pt_1
+
+install:
+    - cd /usr/src/gtest
+    - sudo cmake CMakeLists.txt
+    - sudo make
+    - sudo cp *.a /usr/lib
+    - sudo apt install cppcheck
+    - cd -
+
+before_script:
+    - cd $DIR
+    - cmake .
+    - make
+
+script:
+    - valgrind --track-origins=yes --leak-check=full ./pt_1 < in1.txt
+    - cppcheck -icmake-build-debug/ --inconclusive --enable=all --language=c++ .
+    - ./test
+    - gcovr -r .
+
+after_script:
+    - make clean
+
