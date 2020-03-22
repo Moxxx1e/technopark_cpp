@@ -12,8 +12,8 @@ addons:
 
 env:
     - DIR_shar=pt_2_shared
-	- DIR_stat=pt_2_static
-	- DIT_unit_test=unit_test
+    - DIR_stat=pt_2_static
+    - DIT_unit_test=unit_test
 
 install:
     - cd /usr/src/gtest
@@ -40,21 +40,21 @@ script:
     #- valgrind --track-origins=yes --leak-check=full ./pt_1 < in1.txt
     #- cppcheck -icmake-build-debug/ --inconclusive --enable=all --language=c++ .
     - cd $DIR_stat
-	- cd $DIR_unit_test
-	- ./test_static
-	- cd ..
-	- gcovr -r .
-	- make clean
+    - cd $DIR_unit_test
+    - ./test_static
+    - cd ..
+    - gcovr -r .
+    - make clean
 	
-	- cd ..
+    - cd ..
 
-	- cd $DIR_shar
-	- cd $DIR_unit_test
-	- ./test_shared
-	- cd ..
-	- gcovr -r .
-	- make clean
+    - cd $DIR_shar
+    - cd $DIR_unit_test
+    - ./test_shared
+    - cd ..
+    - gcovr -r .
+    - make clean
 
 after_script:
-	- cd ..
+    - cd ..
 
