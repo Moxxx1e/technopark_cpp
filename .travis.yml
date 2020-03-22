@@ -1,0 +1,60 @@
+language: cpp
+os: linux
+compiler: gcc
+
+addons:
+    apt:
+        packages:
+            - cmake
+            - valgrind
+            - libgtest-dev
+            - gcovr
+
+env:
+    - DIR_shar=pt_2_shared
+	- DIR_stat=pt_2_static
+	- DIT_unit_test=unit_test
+
+install:
+    - cd /usr/src/gtest
+    - sudo cmake CMakeLists.txt
+    - sudo make
+    - sudo cp *.a /usr/lib
+    - sudo apt install cppcheck
+    - cd -
+
+before_script:
+    - cd $DIR_stat
+    - cmake .
+    - make
+	
+	- cd ..
+
+	- cd $DIR_shar
+	- cmake .
+	- make
+	
+	- cd ..
+
+script:
+    #- valgrind --track-origins=yes --leak-check=full ./pt_1 < in1.txt
+    #- cppcheck -icmake-build-debug/ --inconclusive --enable=all --language=c++ .
+    - cd $DIR_stat
+	- cd $DIR_unit_test
+	- ./test_static
+	- cd ..
+	- gcovr -r .
+	- make clean
+	
+	- cd ..
+
+	- cd $DIR_shar
+	- cd $DIR_unit_test
+	- ./test_shared
+	- cd ..
+	- gcovr -r .
+	- make clean
+
+after_script:
+	- cd ..
+
