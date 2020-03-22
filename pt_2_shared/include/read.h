@@ -10,7 +10,7 @@ int read_array_from_file(const char* in_file_name, Comment* array);
 // unable to read number of comments (not integer)
 #define FSCANF_NUMBER_OF_COMMENTS_ERROR -3
 // number is negative or zero
-#define INVALID_NUMBER_OF_COMMENTS_ERROR -4
+#define NOT_POSITIVE_NUMBER_OF_COMMENTS_ERROR -4
 #define FSCANF_ID_ERROR -5
 #define INVALID_MARK_ERROR -6
 #define FSCANF_MARK_ERROR -7
