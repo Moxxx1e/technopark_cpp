@@ -182,7 +182,6 @@ TEST(read_array_from_file, empty_file)
     const char* filename = "../../test_files/empty_file.txt";
     Comment* comments = NULL;
     EXPECT_EQ(read_array_from_file(filename, comments), EMPTY_FILE_ERROR);
-    //EXPECT_EQ(comments, NULL);
 }
 
 TEST(read_array_from_file, number_of_comments_not_int)
@@ -209,7 +208,7 @@ TEST(read_array_from_file, invalid_mark)
 
 TEST(read_array_from_file, correct_file)
 {
-    const char* filename = "../../test_files/ten_million_nodes.txt";
+    const char* filename = "../../test_files/one_million_nodes.txt";
     Comment* comments = NULL;
     EXPECT_EQ(read_array_from_file(filename, comments), SUCCESS);
     free(comments);
