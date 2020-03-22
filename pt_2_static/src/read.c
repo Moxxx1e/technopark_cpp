@@ -69,7 +69,7 @@ int read_mark(FILE* in_file, double* mark)
 {
     int error_code = fscanf(in_file, "%lf", mark);
 
-    if (error_code < 0){
+    if (error_code != 1){
         fprintf(TMP_OUT_FILE, FSCANF_MARK_ERR_MSG);
         return FSCANF_MARK_ERROR;
     }
