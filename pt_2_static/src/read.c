@@ -19,7 +19,7 @@ int read_number_of_comments(FILE* in_file, int* number_of_comments)
 
     if (*number_of_comments <= 0){
         fprintf(TMP_OUT_FILE, INVALID_NUMBER_OF_COMMENTS_ERR_MSG);
-        return INVALID_NUMBER_OF_COMMENTS_ERROR;
+        return NOT_POSITIVE_NUMBER_OF_COMMENTS_ERROR;
     }
 
     return error_code;

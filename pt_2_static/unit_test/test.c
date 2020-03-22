@@ -239,9 +239,9 @@ TEST(read_array_from_file, cant_read_id)
 
 TEST(read_array_from_file, invalid_number_of_comments)
 {
-    const char* filename = "../../test_files/invalid_number_of_comments.txt";
+    const char* filename = "../../test_files/not_positive_number_of_comments.txt";
     Comment* comments = NULL;
-    EXPECT_EQ(read_array_from_file(filename, comments), INVALID_NUMBER_OF_COMMENTS_ERROR);
+    EXPECT_EQ(read_array_from_file(filename, comments), NOT_POSITIVE_NUMBER_OF_COMMENTS_ERROR);
 }
 
 // Number of comments is more than actual number of comments in file
@@ -251,20 +251,6 @@ TEST(read_array_from_file, incorrect_number_of_comments)
     Comment* comments = NULL;
     EXPECT_EQ(read_array_from_file(filename, comments), INCORRECT_NUMBER_OF_COMMENTS_ERROR);
 }
-
-
-/*
-TEST(read_array_from_file, huge_file)
-{
-    const char* filename = "../../test_files/huge_file.txt";
-    Comment* comments = NULL;
-    EXPECT_EQ(read_array_from_file(filename, comments), SUCCESS);
-    free(comments);
-}
- */
-
-// TODO: incorrect number of commments
-// TODO: if file > 10.000.000 strings -> read by chunks
 
 int main(int argc, char** argv)
 {
