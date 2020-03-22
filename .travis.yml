@@ -11,9 +11,9 @@ addons:
             - gcovr
 
 env:
-    - DIR_shar=pt_2_shared
-    - DIR_stat=pt_2_static
-    - DIT_unit_test=unit_test
+    - DIR_SHAR=pt_2_shared
+    - DIR_STAT=pt_2_static
+    - DIR_UNIT_TEST=unit_test
 
 install:
     - cd /usr/src/gtest
@@ -24,13 +24,13 @@ install:
     - cd -
 
 before_script:
-    - cd $DIR_stat
+    - cd $DIR_STAT
     - cmake .
     - make
     
     - cd ..
 
-    - cd $DIR_shar
+    - cd $DIR_SHAR
     - cmake .
     - make
 
@@ -39,8 +39,8 @@ before_script:
 script:
     #- valgrind --track-origins=yes --leak-check=full ./pt_1 < in1.txt
     #- cppcheck -icmake-build-debug/ --inconclusive --enable=all --language=c++ .
-    - cd $DIR_stat
-    - cd $DIR_unit_test
+    - cd $DIR_STAT
+    - cd $DIR_UNIT_TEST
     - ./test_static
     - cd ..
     - gcovr -r .
@@ -48,8 +48,8 @@ script:
 
     - cd ..
 
-    - cd $DIR_shar
-    - cd $DIR_unit_test
+    - cd $DIR_SHAR
+    - cd $DIR_UNIT_TEST
     - ./test_shared
     - cd ..
     - gcovr -r .
