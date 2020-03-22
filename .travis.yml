@@ -10,11 +10,6 @@ addons:
             - libgtest-dev
             - gcovr
 
-env:
-    - DIR_SHAR=pt_2_shared
-    - DIR_STAT=pt_2_static
-    - DIR_UNIT_TEST=unit_test
-
 install:
     - cd /usr/src/gtest
     - sudo cmake CMakeLists.txt
@@ -24,13 +19,13 @@ install:
     - cd -
 
 before_script:
-    - cd $DIR_STAT
+    - cd pt_2_static
     - cmake .
     - make
     
     - cd ..
 
-    - cd $DIR_SHAR
+    - cd pt_2_shared
     - cmake .
     - make
 
@@ -39,8 +34,8 @@ before_script:
 script:
     #- valgrind --track-origins=yes --leak-check=full ./pt_1 < in1.txt
     #- cppcheck -icmake-build-debug/ --inconclusive --enable=all --language=c++ .
-    - cd $DIR_STAT
-    - cd $DIR_UNIT_TEST
+    - cd pt_2_static
+    - cd unit_test
     - ./test_static
     - cd ..
     - gcovr -r .
@@ -48,8 +43,8 @@ script:
 
     - cd ..
 
-    - cd $DIR_SHAR
-    - cd $DIR_UNIT_TEST
+    - cd pt_2_shared
+    - cd unit_test
     - ./test_shared
     - cd ..
     - gcovr -r .
