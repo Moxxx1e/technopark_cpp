@@ -27,14 +27,14 @@ before_script:
     - cd $DIR_stat
     - cmake .
     - make
-	
-	- cd ..
+    
+    - cd ..
 
-	- cd $DIR_shar
-	- cmake .
-	- make
-	
-	- cd ..
+    - cd $DIR_shar
+    - cmake .
+    - make
+
+    - cd ..
 
 script:
     #- valgrind --track-origins=yes --leak-check=full ./pt_1 < in1.txt
@@ -45,7 +45,7 @@ script:
     - cd ..
     - gcovr -r .
     - make clean
-	
+
     - cd ..
 
     - cd $DIR_shar
