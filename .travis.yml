@@ -19,7 +19,7 @@ install:
     - cd -
 
 before_script:
-    #- cd pt_2
+    - cd pt_2
     - cmake .
     - make
     - cd pt_2_static
@@ -67,5 +67,5 @@ after_script:
     - cd ..
 
     - make clean
-     #- cd ..
+    - cd ..
 
