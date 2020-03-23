@@ -49,6 +49,7 @@ Thread_data* create_thread_data_array(Comment* array, unsigned int size,
 #define SYSCONF_ERR_MSG "Sysconf error!\n"
 #define NULL_ARRAY_ERR_MSG "Wrong array (= NULL)!\n"
 #define INVALID_SIZE_ERR_MSG "Size should be positive number\n"
+#define ALLOC_FOR_THREAD_ERR_MSG "Unable to alloc memory for threads!"
 
 int count_novoices_comments(Comment* array, int size) {
     if (!array) {
@@ -73,8 +74,8 @@ int count_novoices_comments(Comment* array, int size) {
 
     Thread_data *thread_data_array = create_thread_data_array(array, size, number_of_threads, section_size);
     if (thread_data_array == NULL) {
-        fprintf(TMP_OUT_FILE, POSIX_MEMALIGN_ERR_MSG);
-        return POSIX_MEMALIGN_ERROR;
+        fprintf(TMP_OUT_FILE, ALLOC_FOR_THREAD_ERR_MSG);
+        return ALLOC_FOR_THREAD_ERROR;
     }
 
     for (int i = 0; i < number_of_threads; i++) {

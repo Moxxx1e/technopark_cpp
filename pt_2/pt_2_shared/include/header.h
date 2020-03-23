@@ -10,13 +10,10 @@
 
 #define TMP_OUT_FILE stdout
 
-#define POSIX_MEMALIGN_ERROR -2
-#define POSIX_MEMALIGN_ERR_MSG "Posix_memalign error!"
-
 typedef struct Comment{
     unsigned int voices;
     int id;
     double mark;
 } Comment;
 
-#endif //PT_2_THREADS_HEADER_H
+#endif

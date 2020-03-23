@@ -27,6 +27,7 @@ int read_number_of_comments(FILE* in_file, int* number_of_comments)
     return SUCCESS;
 }
 
+#define POSIX_MEMALIGN_ERR_MSG "Unable to alloc memory for array of comments!\n"
 Comment* alloc_for_array(int number_of_comments, int* error_code)
 {
     long l1dcls = sysconf(_SC_LEVEL1_DCACHE_LINESIZE);
@@ -109,7 +110,7 @@ int read_voices(FILE* in_file, unsigned int* voices)
 }
 
 #define FILE_OPEN_ERR_MSG "Unable to open file!\n"
-int read_array_from_file(const char* in_file_name, Comment* array)
+int read_array_from_file(const char* in_file_name, Comment** array, int* size)
 {
     FILE* in_file = fopen(in_file_name, "r");
     if (!in_file){
@@ -125,8 +126,8 @@ int read_array_from_file(const char* in_file_name, Comment* array)
     }
 
     int error_alloc = SUCCESS;
-    array = alloc_for_array(number_of_comments, &error_alloc);
-    if (!array){
+    *array = alloc_for_array(number_of_comments, &error_alloc);
+    if (!(*array)){
         fclose(in_file);
         return error_alloc;
     }
@@ -141,7 +142,7 @@ int read_array_from_file(const char* in_file_name, Comment* array)
         error_voices = read_voices(in_file, &voices);
 
         if (unlikely(error_id < 0 || error_mark < 0 || error_voices < 0)){
-            free(array);
+            free(*array);
             fclose(in_file);
             fprintf(TMP_OUT_FILE, " In %d string.\n", i);
             if (error_id < 0)
@@ -152,11 +153,12 @@ int read_array_from_file(const char* in_file_name, Comment* array)
                 return error_voices;
         }
 
-        array[i].voices = voices;
-        array[i].id = id;
-        array[i].mark = mark;
+        (*array)[i].voices = voices;
+        (*array)[i].id = id;
+        (*array)[i].mark = mark;
     }
 
+    *size = number_of_comments;
     fclose(in_file);
     return SUCCESS;
 }

@@ -13,4 +13,4 @@ typedef struct Comment{
     unsigned int voices;
 } Comment;
 
-#endif //PT_2_HEADER_H
+#endif

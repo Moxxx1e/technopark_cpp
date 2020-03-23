@@ -136,7 +136,7 @@ TEST(count_novoices_comments, correct_array)
     int size = 2;
     Comment* comments = create_array(size);
     comments[0] = {0, 0, 0};
-    comments[1] = {1, 3.5, 5};
+    comments[1] = {5, 1, 3.5};
     EXPECT_EQ(count_novoices_comments(comments, size), 1);
     free(comments);
 }
@@ -173,44 +173,50 @@ TEST(count_novoices_comments, ten_million_voices)
 TEST(read_array_from_file, not_existing_file)
 {
     Comment* comments = NULL;
+    int size = 0;
     const char* filename = "../../test_files/not_existing_file.txt";
-    EXPECT_EQ(read_array_from_file(filename, comments), FILE_OPEN_ERROR);
+    EXPECT_EQ(read_array_from_file(filename, &comments, &size), FILE_OPEN_ERROR);
 }
 
 TEST(read_array_from_file, empty_file)
 {
-    const char* filename = "../";
+    const char* filename = "../../test_files/empty_file.txt";
+    int size = 0;
     Comment* comments = NULL;
-    EXPECT_EQ(read_array_from_file(filename, comments), EMPTY_FILE_ERROR);
+    EXPECT_EQ(read_array_from_file(filename, &comments, &size), EMPTY_FILE_ERROR);
 }
 
 TEST(read_array_from_file, number_of_comments_not_int)
 {
     const char* filename = "../../test_files/fscanf_number_of_comments.txt";
     Comment* comments = NULL;
-    EXPECT_EQ(read_array_from_file(filename, comments), FSCANF_NUMBER_OF_COMMENTS_ERROR);
+    int size = 0;
+    EXPECT_EQ(read_array_from_file(filename, &comments, &size), FSCANF_NUMBER_OF_COMMENTS_ERROR);
+    free(comments);
 }
 
 TEST(read_array_from_file, invalid_voices)
 {
     const char* filename = "../../test_files/invalid_voices.txt";
     Comment* comments = NULL;
-    EXPECT_EQ(read_array_from_file(filename, comments), INVALID_VOICES_ERROR);
+    int size = 0;
+    EXPECT_EQ(read_array_from_file(filename, &comments, &size), INVALID_VOICES_ERROR);
 }
 
 TEST(read_array_from_file, invalid_mark)
 {
     const char* filename = "../../test_files/invalid_mark.txt";
     Comment* comments = NULL;
-    EXPECT_EQ(read_array_from_file(filename, comments), INVALID_MARK_ERROR);
+    int size = 0;
+    EXPECT_EQ(read_array_from_file(filename, &comments, &size), INVALID_MARK_ERROR);
 }
 
-// Git can't store file more than 100 MB
 TEST(read_array_from_file, correct_file)
 {
     const char* filename = "../../test_files/one_million_nodes.txt";
     Comment* comments = NULL;
-    EXPECT_EQ(read_array_from_file(filename, comments), SUCCESS);
+    int size = 0;
+    EXPECT_EQ(read_array_from_file(filename, &comments, &size), SUCCESS);
     free(comments);
 }
 
@@ -218,28 +224,32 @@ TEST(read_array_from_file, cant_read_mark)
 {
     const char* filename = "../../test_files/fscanf_mark.txt";
     Comment* comments = NULL;
-    EXPECT_EQ(read_array_from_file(filename, comments), FSCANF_MARK_ERROR);
+    int size = 0;
+    EXPECT_EQ(read_array_from_file(filename, &comments, &size), FSCANF_MARK_ERROR);
 }
 
 TEST(read_array_from_file, cant_read_voices)
 {
     const char* filename = "../../test_files/fscanf_voices.txt";
     Comment* comments = NULL;
-    EXPECT_EQ(read_array_from_file(filename, comments), FSCANF_VOICES_ERROR);
+    int size = 0;
+    EXPECT_EQ(read_array_from_file(filename, &comments, &size), FSCANF_VOICES_ERROR);
 }
 
 TEST(read_array_from_file, cant_read_id)
 {
     const char* filename = "../../test_files/fscanf_id.txt";
     Comment* comments = NULL;
-    EXPECT_EQ(read_array_from_file(filename, comments), FSCANF_ID_ERROR);
+    int size = 0;
+    EXPECT_EQ(read_array_from_file(filename, &comments, &size), FSCANF_ID_ERROR);
 }
 
 TEST(read_array_from_file, invalid_number_of_comments)
 {
     const char* filename = "../../test_files/not_positive_number_of_comments.txt";
     Comment* comments = NULL;
-    EXPECT_EQ(read_array_from_file(filename, comments), NOT_POSITIVE_NUMBER_OF_COMMENTS_ERROR);
+    int size = 0;
+    EXPECT_EQ(read_array_from_file(filename, &comments, &size), NOT_POSITIVE_NUMBER_OF_COMMENTS_ERROR);
 }
 
 // Number of comments is more than actual number of comments in file
@@ -247,7 +257,8 @@ TEST(read_array_from_file, incorrect_number_of_comments)
 {
     const char* filename = "../../test_files/incorrect_number_of_comments.txt";
     Comment* comments = NULL;
-    EXPECT_EQ(read_array_from_file(filename, comments), INCORRECT_NUMBER_OF_COMMENTS_ERROR);
+    int size = 0;
+    EXPECT_EQ(read_array_from_file(filename, &comments, &size), INCORRECT_NUMBER_OF_COMMENTS_ERROR);
 }
 
 int main(int argc, char** argv)

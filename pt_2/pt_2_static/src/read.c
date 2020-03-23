@@ -104,7 +104,7 @@ int read_voices(FILE* in_file, unsigned int* voices)
 }
 
 #define FILE_OPEN_ERR_MSG "Unable to open file!"
-int read_array_from_file(const char* in_file_name, Comment* array)
+int read_array_from_file(const char* in_file_name, Comment** array, int* size)
 {
     FILE* in_file = fopen(in_file_name, "r");
     if (!in_file){
@@ -120,23 +120,23 @@ int read_array_from_file(const char* in_file_name, Comment* array)
     }
 
     int error_alloc = SUCCESS;
-    array = alloc_for_array(number_of_comments, &error_alloc);
-    if (!array){
+    *array = alloc_for_array(number_of_comments, &error_alloc);
+    if (!(*array)){
         fclose(in_file);
         return error_alloc;
     }
 
     int id;
-    int error_id, error_mark, error_voices;
     double mark;
     unsigned int voices;
+    int error_id, error_mark, error_voices;
     for(int i = 0; i < number_of_comments; i++){
         error_id = read_id(in_file, &id);
         error_mark = read_mark(in_file, &mark);
         error_voices = read_voices(in_file, &voices);
 
         if (error_id < 0 || error_mark < 0 || error_voices < 0){
-            free(array);
+            free(*array);
             fclose(in_file);
             fprintf(TMP_OUT_FILE, " In %d string.\n", i);
             if (error_id < 0)
@@ -147,10 +147,11 @@ int read_array_from_file(const char* in_file_name, Comment* array)
                 return error_voices;
         }
 
-        array[i].id = id;
-        array[i].mark = mark;
-        array[i].voices = voices;
+        (*array)[i].id = id;
+        (*array)[i].mark = mark;
+        (*array)[i].voices = voices;
     }
+    *size = number_of_comments;
     fclose(in_file);
     return SUCCESS;
 }

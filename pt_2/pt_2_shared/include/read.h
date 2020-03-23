@@ -2,7 +2,6 @@
 #define PT_2_THREADS_READ_H
 
 #include "header.h"
-int read_array_from_file(const char* in_file_name, Comment* array);
 
 #define SUCCESS 0
 #define FILE_OPEN_ERROR -1
@@ -18,4 +17,8 @@ int read_array_from_file(const char* in_file_name, Comment* array);
 #define INVALID_VOICES_ERROR -9
 // There are more comments in file than number said
 #define INCORRECT_NUMBER_OF_COMMENTS_ERROR -10
-#endif //PT_2_THREADS_READ_H
+#define POSIX_MEMALIGN_ERROR -11
+
+//int read_array_from_file(const char* in_file_name, Comment** array);
+int read_array_from_file(const char* in_file_name, Comment** array, int* size);
+#endif
