@@ -54,6 +54,10 @@ script:
     - gcovr -r .
     - make clean
 
+    - cd ..
+    - ./run_stress.sh
+    
 after_script:
+    - make clean
     - cd ..
 
