@@ -33,8 +33,9 @@ before_script:
     - cd ..
 
 script:
-    #- valgrind --track-origins=yes --leak-check=full ./pt_1 < in1.txt
-    #- cppcheck -icmake-build-debug/ --inconclusive --enable=all --language=c++ .
+    - valgrind --track-origins=yes --leak-check=full ./pt_2_st
+    - valgrind --track-origins=yes --leak-check=full ./pt_2_sh
+    - cppcheck -icmake-build-debug/ --inconclusive --enable=all --language=c .
     - cd pt_2_static
     - cd unit_test
     - ./test_static

@@ -67,37 +67,6 @@ int fill_array_dif_values(Comment* array, unsigned int size)
     return zero_comments_counter;
 }
 
-#define MAX_NUMBER_OF_VOICES 100
-#define DESIRED_PERCENTAGE_OF_NOVOICE_COMMENTS 40
-void generate_correct_file(const char* filename, int size)
-{
-    int id;
-    double mark;
-    unsigned int voices;
-
-    FILE* f = fopen(filename, "w");
-
-    fprintf(f, "%d\n ", size);
-    for (int i = 0; i < size; i++){
-        id = i;
-        int flag = rand() % 100 + 1;
-
-        if (flag > DESIRED_PERCENTAGE_OF_NOVOICE_COMMENTS){
-            mark = get_rand_mark();
-            voices = rand() % MAX_NUMBER_OF_VOICES;
-        }
-        else{
-            mark = 0;
-            voices = 0;
-        }
-
-        fprintf(f, "%d ", id);
-        fprintf(f, "%lf ", mark);
-        fprintf(f, "%d\n", voices);
-    }
-    fclose(f);
-}
-
 TEST(count_novoices_comments, null_array)
 {
     Comment* comments = NULL;
