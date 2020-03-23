@@ -43,7 +43,6 @@ script:
     - ./test_static
     - cd ..
     - gcovr -r .
-    - make clean
 
     - cd ..
 
@@ -52,12 +51,21 @@ script:
     - ./test_shared
     - cd ..
     - gcovr -r .
-    - make clean
 
     - cd ..
     - ./run_stress.sh
     
 after_script:
+    - cd pt_2_static
+    - make clean
+
+    - cd ..
+
+    - cd pt_2_shared
+    - make clean
+
+    - cd ..
+
     - make clean
     - cd ..
 
