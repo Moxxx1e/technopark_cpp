@@ -19,7 +19,7 @@ install:
     - cd -
 
 before_script:
-	- cd pt_2
+    - cd pt_2
     - cd pt_2_static
     - cmake .
     - make
