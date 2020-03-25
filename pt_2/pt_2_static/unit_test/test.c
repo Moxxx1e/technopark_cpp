@@ -246,6 +246,7 @@ TEST(read_array_from_file, correct_file)
         EXPECT_EQ(comments[i].voices, comments_in_file[i].voices);
         EXPECT_EQ(comments[i].mark*10, comments_in_file[i].mark*10);
     }
+    free(comments_in_file);
 }
 
 int main(int argc, char** argv)
