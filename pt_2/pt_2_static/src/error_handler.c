@@ -2,7 +2,7 @@
 
 const char* get_error_message(int error_code)
 {
-    switch (error_code){
+    switch (error_code) {
         case FILE_OPEN_ERROR:
             return FILE_OPEN_ERR_MSG;
 

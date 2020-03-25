@@ -5,7 +5,7 @@
 
 Comment* create_array(unsigned int size)
 {
-    Comment* array = (Comment*)malloc(sizeof(Comment)*size);
+    Comment* array = (Comment*)malloc(sizeof(Comment) * size);
     return array;
 }
 
@@ -38,7 +38,7 @@ Comment generate_zero_comment()
 
 void fill_array(Comment* array, unsigned int size)
 {
-    for(int i = 0; i < size; i++){
+    for (int i = 0; i < size; i++) {
         Comment new_comment = generate_random_comment();
         array[i] = new_comment;
     }
@@ -55,11 +55,11 @@ void fill_array_zeros(Comment* array, unsigned int size)
 int fill_array_dif_values(Comment* array, unsigned int size)
 {
     int zero_comments_counter = 0;
-    for (int i = 0; i < size; i++){
+    for (int i = 0; i < size; i++) {
         int flag = rand() % 2;
         if (flag)
             array[i] = generate_random_comment();
-        else{
+        else {
             array[i] = generate_zero_comment();
             zero_comments_counter++;
         }
@@ -104,8 +104,8 @@ TEST(count_novoices_comments, correct_array)
 {
     int size = 2;
     Comment* comments = create_array(size);
-    comments[0] = {0, 0, 0};
-    comments[1] = {1, 3.5, 5};
+    comments[0] = { 0, 0, 0 };
+    comments[1] = { 1, 3.5, 5 };
     EXPECT_EQ(count_novoices_comments(comments, size), 1);
     free(comments);
 }

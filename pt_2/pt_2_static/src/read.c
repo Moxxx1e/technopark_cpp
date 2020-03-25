@@ -18,7 +18,7 @@ int read_number_of_comments(FILE* in_file, int* number_of_comments)
 
 Comment* alloc_for_array(int number_of_comments, int* error_code)
 {
-    Comment* array = (Comment*)malloc(sizeof(Comment)*number_of_comments);
+    Comment* array = (Comment*)malloc(sizeof(Comment) * number_of_comments);
     if (!array)
         *error_code = ALLOC_ERROR;
 
@@ -42,7 +42,7 @@ int read_id(FILE* in_file, int* id)
 #define RIGHT_MARK_BOUNDARY 50
 int isMarkValid(double mark)
 {
-    return mark == 0 || (mark*10 >= LEFT_MARK_BOUNDARY && mark*10 <= RIGHT_MARK_BOUNDARY);
+    return mark == 0 || (mark * 10 >= LEFT_MARK_BOUNDARY && mark * 10 <= RIGHT_MARK_BOUNDARY);
 }
 
 int read_mark(FILE* in_file, double* mark)
@@ -68,7 +68,7 @@ int read_voices(FILE* in_file, unsigned int* voices)
     if (int_voices < 0)
         return INVALID_VOICES_ERROR;
 
-    *voices = (unsigned int) int_voices;
+    *voices = (unsigned int)int_voices;
 
     return SUCCESS;
 }
@@ -81,14 +81,14 @@ int read_array_from_file(const char* in_file_name, Comment** array, int* size)
 
     int number_of_comments = 0;
     int error_number_of_comments = read_number_of_comments(in_file, &number_of_comments);
-    if (error_number_of_comments < 0){
+    if (error_number_of_comments < 0) {
         fclose(in_file);
         return error_number_of_comments;
     }
 
     int error_alloc = SUCCESS;
     *array = alloc_for_array(number_of_comments, &error_alloc);
-    if (!(*array)){
+    if (!(*array)) {
         fclose(in_file);
         return error_alloc;
     }
@@ -97,12 +97,12 @@ int read_array_from_file(const char* in_file_name, Comment** array, int* size)
     double mark;
     unsigned int voices;
     int error_id, error_mark, error_voices;
-    for(int i = 0; i < number_of_comments; i++){
+    for (int i = 0; i < number_of_comments; i++) {
         error_id = read_id(in_file, &id);
         error_mark = read_mark(in_file, &mark);
         error_voices = read_voices(in_file, &voices);
 
-        if (error_id < 0 || error_mark < 0 || error_voices < 0){
+        if (error_id < 0 || error_mark < 0 || error_voices < 0) {
             free(*array);
             fclose(in_file);
             fprintf(TMP_OUT_FILE, " In %d string.\n", i);

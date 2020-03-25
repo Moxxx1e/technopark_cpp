@@ -9,9 +9,9 @@ int count_novoices_comments(Comment* array, int size)
         return INVALID_SIZE_ERROR;
 
     int counter = 0;
-    for(int i = 0; i < size; i++)
-        if(array[i].voices == 0)
+    for (int i = 0; i < size; i++)
+        if (array[i].voices == 0)
             counter++;
-        
+
     return counter;
 }
