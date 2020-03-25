@@ -180,7 +180,7 @@ TEST(read_array_from_file, invalid_mark)
     EXPECT_EQ(read_array_from_file(filename, &comments, &size), INVALID_MARK_ERROR);
 }
 
-TEST(read_array_from_file, correct_file)
+TEST(read_array_from_file, big_file)
 {
     const char* filename = "../../test_files/one_million_nodes.txt";
     Comment* comments = NULL;
@@ -228,6 +228,24 @@ TEST(read_array_from_file, incorrect_number_of_comments)
     Comment* comments = NULL;
     int size = 0;
     EXPECT_EQ(read_array_from_file(filename, &comments, &size), INCORRECT_NUMBER_OF_COMMENTS_ERROR);
+}
+
+TEST(read_array_from_file, correct_file)
+{
+    const char* filename = "../../test_files/correct_file.txt";
+    Comment* comments_in_file = NULL;
+    Comment comments[4] = {
+            {0, 0, 0}, {5, 1, 2.3}, {521, 2, 4.5}, {10, 3, 3.3}
+    };
+
+    int size = 0;
+    EXPECT_EQ(read_array_from_file(filename, &comments_in_file, &size), SUCCESS);
+    EXPECT_EQ(size, 4);
+    for (int i = 0; i < size; i++) {
+        EXPECT_EQ(comments[i].id, comments_in_file[i].id);
+        EXPECT_EQ(comments[i].voices, comments_in_file[i].voices);
+        EXPECT_EQ(comments[i].mark*10, comments_in_file[i].mark*10);
+    }
 }
 
 int main(int argc, char** argv)
