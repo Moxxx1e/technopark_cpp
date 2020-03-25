@@ -41,6 +41,12 @@ const char* get_error_message(int error_code)
 
         case INVALID_SIZE_ERROR:
             return INVALID_SIZE_ERR_MSG;
+
+        case ALLOC_FOR_THREAD_ERROR:
+            return ALLOC_FOR_THREAD_ERR_MSG;
+
+        case PTHREAD_CREATE_ERROR:
+            return PTHREAD_CREATE_ERR_MSG;
     }
     return NULL;
 }

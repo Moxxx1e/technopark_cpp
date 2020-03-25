@@ -45,9 +45,6 @@ Thread_data* create_thread_data_array(Comment* array, unsigned int size,
     return thread_data_array;
 }
 
-#define PTHREAD_CREATE_ERR_MSG "Unable to create thread!\n"
-#define SYSCONF_ERR_MSG "Sysconf error!\n"
-#define ALLOC_FOR_THREAD_ERR_MSG "Unable to alloc memory for threads!"
 int count_novoices_comments(Comment* array, int size)
 {
     if (!array)
@@ -56,10 +53,6 @@ int count_novoices_comments(Comment* array, int size)
         return INVALID_SIZE_ERROR;
 
     al64long_t number_of_threads = sysconf(_SC_NPROCESSORS_ONLN);
-    if (!number_of_threads) {
-        fprintf(TMP_OUT_FILE, SYSCONF_ERR_MSG);
-        return SYSCONF_ERROR;
-    }
 
     pthread_t pthread_t_array[number_of_threads];
     pthread_attr_t attr;
@@ -67,18 +60,14 @@ int count_novoices_comments(Comment* array, int size)
     al64uint_t section_size = size / number_of_threads;
 
     Thread_data* thread_data_array = create_thread_data_array(array, size, number_of_threads, section_size);
-    if (thread_data_array == NULL) {
-        fprintf(TMP_OUT_FILE, ALLOC_FOR_THREAD_ERR_MSG);
+    if (thread_data_array == NULL)
         return ALLOC_FOR_THREAD_ERROR;
-    }
 
     for (int i = 0; i < number_of_threads; i++) {
         int error_code = pthread_create(&(pthread_t_array[i]), &attr,
                                         count, &thread_data_array[i]);
-        if (error_code) {
-            fprintf(TMP_OUT_FILE, PTHREAD_CREATE_ERR_MSG);
+        if (error_code)
             return PTHREAD_CREATE_ERROR;
-        }
 
         cpu_set_t cpuset;
         CPU_ZERO(&cpuset);

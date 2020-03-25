@@ -46,6 +46,12 @@
 #define INVALID_SIZE_ERROR -13
 #define INVALID_SIZE_ERR_MSG "Size should be positive number\n"
 
+#define ALLOC_FOR_THREAD_ERROR -14
+#define ALLOC_FOR_THREAD_ERR_MSG "Unable to alloc memory for threads!"
+
+#define PTHREAD_CREATE_ERROR -15
+#define PTHREAD_CREATE_ERR_MSG "Unable to create thread!\n"
+
 const char* get_error_message(int error_code);
 
 #endif //PT_2_ERROR_HANDLER_H
