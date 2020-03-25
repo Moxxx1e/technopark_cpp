@@ -2,12 +2,11 @@
 #define PT_2_THREADS_LIBRARY_H
 
 #include "header.h"
+#include "error_handler.h"
 
-#define PTHREAD_CREATE_ERROR -1
-#define ALLOC_FOR_THREAD_ERROR -2
 #define SYSCONF_ERROR -3
-#define NULL_ARRAY_ERROR -4
-#define INVALID_SIZE_ERROR -5
+#define PTHREAD_CREATE_ERROR -4
+#define ALLOC_FOR_THREAD_ERROR -5
 
 int count_novoices_comments(Comment* array, int size);
 

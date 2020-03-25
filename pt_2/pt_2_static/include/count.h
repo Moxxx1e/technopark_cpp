@@ -2,9 +2,7 @@
 #define PT_2_COUNT_H
 
 #include "header.h"
-
-#define NULL_ARRAY_ERROR -1
-#define INVALID_SIZE_ERROR -2
+#include "error_handler.h"
 
 int count_novoices_comments(Comment* array, int size);
 

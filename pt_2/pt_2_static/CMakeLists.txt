@@ -3,7 +3,7 @@ project(pt_2_static C)
 
 set(CMAKE_C_STANDARD 99)
 
-set(SOURCES src/count.c src/read.c)
+set(SOURCES src/count.c src/read.c src/error_handler.c)
 include_directories("include/")
 
 add_subdirectory(unit_test)
