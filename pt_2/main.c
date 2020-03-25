@@ -17,14 +17,20 @@ unsigned long long tick()
     return t;
 }
 
+#define USAGE_MESG "usage: <filename> or <path> <filename>"
+#define WRONG_LAUNCH -1
 int main(int argc, char** argv)
 {
     char* filename = NULL;
-    if (argc != 2){
+    if (argc == 1)
         filename = "stress_test_files/1000.txt";
-    }
-    else{
+    else if (argc == 2)
         filename = argv[1];
+    else if (argc == 3)
+        filename = strcat(argv[1], argv[2]);
+    else {
+        fprintf(TMP_OUT_FILE, USAGE_MESG);
+        return WRONG_LAUNCH;
     }
 
     int size = 0;
