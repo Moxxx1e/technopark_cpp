@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "stdlib.h"
+#include "string.h"
 
 #ifndef SHARED
 #include "pt_2_shared/include/read.h"
@@ -18,7 +19,7 @@ unsigned long long tick()
 
 int main(int argc, char** argv)
 {
-    char* filename;
+    char* filename = NULL;
     if (argc != 2){
         filename = "stress_test_files/1000.txt";
     }
