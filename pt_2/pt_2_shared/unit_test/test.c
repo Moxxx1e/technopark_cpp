@@ -67,14 +67,14 @@ int fill_array_dif_values(Comment_shared* array, unsigned int size)
     return zero_comments_counter;
 }
 
-TEST(count_novoices_comments, null_array)
+TEST(count_novoices_comments_sh, null_array)
 {
     Comment_shared* comments = NULL;
     unsigned int size = 2;
-    EXPECT_EQ(count_novoices_comments(comments, size), NULL_ARRAY_ERROR);
+    EXPECT_EQ(count_novoices_comments_sh(comments, size), NULL_ARRAY_ERROR);
 }
 
-TEST(count_novoices_comments, negative_size)
+TEST(count_novoices_comments_sh, negative_size)
 {
     int create_size = 5;
     Comment_shared* comments = create_array(create_size);
@@ -83,11 +83,11 @@ TEST(count_novoices_comments, negative_size)
     fill_array(comments, create_size);
 
     int size = -2;
-    EXPECT_EQ(count_novoices_comments(comments, size), INVALID_SIZE_ERROR);
+    EXPECT_EQ(count_novoices_comments_sh(comments, size), INVALID_SIZE_ERROR);
     free(comments);
 }
 
-TEST(count_novoices_comments, zero_size)
+TEST(count_novoices_comments_sh, zero_size)
 {
     int create_size = 5;
     Comment_shared* comments = create_array(create_size);
@@ -96,46 +96,46 @@ TEST(count_novoices_comments, zero_size)
     fill_array(comments, create_size);
 
     int size = 0;
-    EXPECT_EQ(count_novoices_comments(comments, size), INVALID_SIZE_ERROR);
+    EXPECT_EQ(count_novoices_comments_sh(comments, size), INVALID_SIZE_ERROR);
     free(comments);
 }
 
-TEST(count_novoices_comments, correct_array)
+TEST(count_novoices_comments_sh, correct_array)
 {
     int size = 2;
     Comment_shared* comments = create_array(size);
     comments[0] = { 0, 0, 0 };
     comments[1] = { 5, 1, 3.5 };
-    EXPECT_EQ(count_novoices_comments(comments, size), 1);
+    EXPECT_EQ(count_novoices_comments_sh(comments, size), 1);
     free(comments);
 }
 
-TEST(count_novoices_comments, zero_bad_voices)
+TEST(count_novoices_comments_sh, zero_bad_voices)
 {
     int size = 100;
     Comment_shared* comments = create_array(size);
     fill_array(comments, size);
-    EXPECT_EQ(count_novoices_comments(comments, size), 0);
+    EXPECT_EQ(count_novoices_comments_sh(comments, size), 0);
     free(comments);
 }
 
-TEST(count_novoices_comments, only_bad_voices)
+TEST(count_novoices_comments_sh, only_bad_voices)
 {
     int size = 100;
     Comment_shared* comments = create_array(size);
     fill_array_zeros(comments, size);
-    EXPECT_EQ(count_novoices_comments(comments, size), size);
+    EXPECT_EQ(count_novoices_comments_sh(comments, size), size);
     free(comments);
 }
 
-TEST(count_novoices_comments, ten_million_voices)
+TEST(count_novoices_comments_sh, ten_million_voices)
 {
     int size = 10000000;
     Comment_shared* comments = create_array(size);
     if (!comments)
         return;
     int result = fill_array_dif_values(comments, size);
-    EXPECT_EQ(count_novoices_comments(comments, size), result);
+    EXPECT_EQ(count_novoices_comments_sh(comments, size), result);
     free(comments);
 }
 
