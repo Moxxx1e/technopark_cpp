@@ -55,15 +55,5 @@ int main(int argc, const char* argv[])
         free(comments);
     }
 
-
-    //void* handle = dlopen("pt_2_shared/libpt_2_shared_mod.so", RTLD_LAZY);
-    //int (*read_array_from_file_shared)(FILE*, Comment_static**, int*);
-    //int (*count_novoice_comments_shared)(Comment_static*, int*);
-    //read_array_from_file_shared = (int (*)(FILE*, Comment_static**, int*))
-      //      dlsym(handle, "read_array_from_file");
-    //count_novoice_comments_shared = (int (*)(Comment_static*, int*))
-        //    dlsym(handle, "count_novoice_comments");
-    //dlclose(handle);
-
     return 0;
 }

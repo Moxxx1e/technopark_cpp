@@ -9,7 +9,7 @@ include_directories("include/")
 
 add_subdirectory(unit_test)
 add_library(${PROJECT_NAME}_lib SHARED ${SOURCES})
-
-#add_library(${PROJECT_NAME}_mod MODULE ${SOURCES})
+add_library(${PROJECT_NAME}_mod MODULE ${SOURCES})
 
 target_include_directories (${PROJECT_NAME}_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories (${PROJECT_NAME}_mod PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
