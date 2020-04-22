@@ -9,11 +9,11 @@ add_subdirectory(pt_2_static)
 add_subdirectory(pt_2_shared)
 
 #add_definitions(-DSHARED)
-add_executable(pt_2_sh main.c)
+#add_executable(pt_2_sh main.c)
 #remove_definitions(-DSHARED)
 
 add_executable(pt_2 main.c)
 #add_executable(pt_2_mod main.c)
 
 target_link_libraries (${PROJECT_NAME} LINK_PUBLIC pt_2_shared_lib)
-#target_link_libraries (${PROJECT_NAME}_st LINK_PUBLIC pt_2_static_lib)
+target_link_libraries (${PROJECT_NAME} LINK_PUBLIC pt_2_static_lib)
