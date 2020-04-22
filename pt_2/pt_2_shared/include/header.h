@@ -10,7 +10,7 @@
 
 #define TMP_OUT_FILE stdout
 
-typedef struct Comment{
+typedef struct Comment_shared{
     unsigned int voices;
     int id;
     double mark;
