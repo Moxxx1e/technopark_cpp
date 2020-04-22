@@ -3,7 +3,7 @@ project(pt_2 C)
 
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pthread")
-add_link_options(-ldl)
+#add_link_options(-ldl)
 
 add_subdirectory(pt_2_static)
 add_subdirectory(pt_2_shared)
