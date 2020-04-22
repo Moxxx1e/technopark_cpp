@@ -4,6 +4,6 @@
 #include "header.h"
 #include "error_handler.h"
 
-int count_novoices_comments(Comment* array, int size);
+int count_novoices_comments_st(Comment_static* array, int size);
 
 #endif

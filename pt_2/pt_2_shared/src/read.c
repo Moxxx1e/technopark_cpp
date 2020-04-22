@@ -18,14 +18,14 @@ int read_number_of_comments(FILE* in_file, int* number_of_comments)
     return SUCCESS;
 }
 
-Comment* alloc_for_array(int number_of_comments, int* error_code)
+Comment_shared* alloc_for_array(int number_of_comments, int* error_code)
 {
     long l1dcls = sysconf(_SC_LEVEL1_DCACHE_LINESIZE);
     if (l1dcls == -1)
         l1dcls = sizeof(void*);
 
-    Comment* array = NULL;
-    *error_code = posix_memalign((void**)&array, l1dcls, sizeof(Comment) * number_of_comments);
+    Comment_shared* array = NULL;
+    *error_code = posix_memalign((void**)&array, l1dcls, sizeof(Comment_shared) * number_of_comments);
     if (*error_code) {
         *error_code = ALLOC_ERROR;
         return NULL;
@@ -81,7 +81,7 @@ int read_voices(FILE* in_file, unsigned int* voices)
     return SUCCESS;
 }
 
-int read_array_from_file(const char* in_file_name, Comment** array, int* size)
+int read_array_from_file_sh(const char* in_file_name, Comment_shared** array, int* size)
 {
     FILE* in_file = fopen(in_file_name, "r");
     if (!in_file)

@@ -4,7 +4,7 @@ typedef unsigned int __attribute((aligned(64))) al64uint_t;
 typedef long __attribute((aligned(64))) al64long_t;
 
 typedef struct Thread_data {
-    Comment* array;
+    Comment_shared* array;
     unsigned int size;
     int counter;
 } Thread_data;
@@ -20,7 +20,7 @@ void* count(void* arg)
     pthread_exit(0);
 }
 
-Thread_data* create_thread_data_array(Comment* array, unsigned int size,
+Thread_data* create_thread_data_array(Comment_shared* array, unsigned int size,
                                       long number_of_threads, unsigned int section_size)
 {
     long l1dcls = sysconf(_SC_LEVEL1_DCACHE_LINESIZE);
@@ -45,7 +45,7 @@ Thread_data* create_thread_data_array(Comment* array, unsigned int size,
     return thread_data_array;
 }
 
-int count_novoices_comments(Comment* array, int size)
+int count_novoices_comments(Comment_shared* array, int size)
 {
     if (!array)
         return NULL_ARRAY_ERROR;

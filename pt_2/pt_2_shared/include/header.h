@@ -14,6 +14,6 @@ typedef struct Comment{
     unsigned int voices;
     int id;
     double mark;
-} Comment;
+} Comment_shared;
 
 #endif

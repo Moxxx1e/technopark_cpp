@@ -16,9 +16,9 @@ int read_number_of_comments(FILE* in_file, int* number_of_comments)
     return error_code;
 }
 
-Comment* alloc_for_array(int number_of_comments, int* error_code)
+Comment_static* alloc_for_array(int number_of_comments, int* error_code)
 {
-    Comment* array = (Comment*)malloc(sizeof(Comment) * number_of_comments);
+    Comment_static* array = (Comment_static*)malloc(sizeof(Comment_static) * number_of_comments);
     if (!array)
         *error_code = ALLOC_ERROR;
 
@@ -73,7 +73,7 @@ int read_voices(FILE* in_file, unsigned int* voices)
     return SUCCESS;
 }
 
-int read_array_from_file(const char* in_file_name, Comment** array, int* size)
+int read_array_from_file_st(const char* in_file_name, Comment_static** array, int* size)
 {
     FILE* in_file = fopen(in_file_name, "r");
     if (!in_file)

@@ -1,6 +1,6 @@
 #include "../include/count.h"
 
-int count_novoices_comments(Comment* array, int size)
+int count_novoices_comments_st(Comment_static* array, int size)
 {
     if (!array)
         return NULL_ARRAY_ERROR;

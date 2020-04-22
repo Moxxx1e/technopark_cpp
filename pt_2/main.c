@@ -1,14 +1,17 @@
 #include <stdio.h>
-#include "stdlib.h"
-#include "string.h"
+#include <stdlib.h>
+#include <string.h>
+#include "dlfcn.h"
+#include "gnu/lib-names.h"
 
-#ifndef SHARED
+//#ifndef SHARED
+
 #include "pt_2_shared/include/read.h"
 #include "pt_2_shared/include/count.h"
-#else
 #include "pt_2_static/include/read.h"
 #include "pt_2_static/include/count.h"
-#endif
+
+//#endif
 
 unsigned long long tick()
 {
@@ -21,7 +24,7 @@ unsigned long long tick()
 #define USAGE_MESG "usage: <filename> or <path> <filename>"
 #define WRONG_LAUNCH_ERROR -1
 #define READ_FILE_ERROR -2
-int main(int argc, char** argv)
+int main(int argc, const char* argv[])
 {
     char* filename = NULL;
     if (argc == 1)
@@ -36,21 +39,31 @@ int main(int argc, char** argv)
     }
 
     int size = 0;
-    Comment* comments = NULL;
-    int error_code = read_array_from_file(filename, &comments, &size);
+    Comment_static* comments = NULL;
+    int error_code = read_array_from_file_st(filename, &comments, &size);
     const char* error_message = get_error_message(error_code);
     if (error_message) {
-        fprintf(TMP_OUT_FILE, error_message);
+        fprintf(TMP_OUT_FILE, "%s", error_message);
         return READ_FILE_ERROR;
     }
 
     if (comments) {
         long long start_time = tick();
-        int result = count_novoices_comments(comments, size);
+        int result = count_novoices_comments_st(comments, size);
         long long end_time = tick();
         fprintf(TMP_OUT_FILE, "result = %d, time: %llu\n", result, end_time - start_time);
         free(comments);
     }
+
+
+    //void* handle = dlopen("pt_2_shared/libpt_2_shared_mod.so", RTLD_LAZY);
+    //int (*read_array_from_file_shared)(FILE*, Comment_static**, int*);
+    //int (*count_novoice_comments_shared)(Comment_static*, int*);
+    //read_array_from_file_shared = (int (*)(FILE*, Comment_static**, int*))
+      //      dlsym(handle, "read_array_from_file");
+    //count_novoice_comments_shared = (int (*)(Comment_static*, int*))
+        //    dlsym(handle, "count_novoice_comments");
+    //dlclose(handle);
 
     return 0;
 }
