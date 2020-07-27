@@ -1,0 +1,71 @@
+language: cpp
+os: linux
+compiler: gcc
+
+addons:
+    apt:
+        packages:
+            - cmake
+            - valgrind
+            - libgtest-dev
+            - gcovr
+
+install:
+    - cd /usr/src/gtest
+    - sudo cmake CMakeLists.txt
+    - sudo make
+    - sudo cp *.a /usr/lib
+    - sudo apt install cppcheck
+    - cd -
+
+before_script:
+    - cd pt_2
+    - cmake .
+    - make
+    - cd pt_2_static
+    - cmake .
+    - make
+    
+    - cd ..
+
+    - cd pt_2_shared
+    - cmake .
+    - make
+
+    - cd ..
+
+script:
+    - valgrind --track-origins=yes --leak-check=full ./pt_2_st
+    - valgrind --track-origins=yes --leak-check=full ./pt_2_sh
+    - cppcheck -icmake-build-debug/ --inconclusive --enable=all --language=c .
+    - cd pt_2_static
+    - cd unit_test
+    - ./test_static
+    - cd ..
+    - gcovr -r .
+
+    - cd ..
+
+    - cd pt_2_shared
+    - cd unit_test
+    - ./test_shared
+    - cd ..
+    - gcovr -r .
+
+    - cd ..
+    - ./run_stress.sh
+    
+after_script:
+    - cd pt_2_static
+    - make clean
+
+    - cd ..
+
+    - cd pt_2_shared
+    - make clean
+
+    - cd ..
+
+    - make clean
+    - cd ..
+
